@@ -5,17 +5,36 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<style>
+	table{
+	text-align: center;
+	}
+	
+	tr:nth-child(1){
+	background-color: powderblue;
+	font-weight: bold;
+	}
+	
+	td{
+	padding : 5px 10px;
+	}
+</style>
 </head>
 <body>
+
 <%
-	String num=request.getParameter("num");
+	request.setCharacterEncoding("utf-8");
+
+	int num=Integer.parseInt(request.getParameter("num"));
 	String name=request.getParameter("name");
 	String grade=request.getParameter("grade");
 	String subject=request.getParameter("subject");
 	String memo=request.getParameter("memo");
-	String hobby[]=request.getParameterValues("hobbies");
+	String[] hobby=request.getParameterValues("hobbies");
 	String hobbies="";
-	for(String s=0; s)
+	for(int i=0; i<hobby.length; i++){
+		hobbies+=hobby[i]+" ";
+	}
 %>
 
 <table border="1">
@@ -32,7 +51,7 @@
 <td><%=name %></td>
 <td><%=grade %></td>
 <td><%=subject %></td>
-<td><%=hobby %></td>
+<td><%=hobbies %></td>
 <td><%=memo %></td>
 </tr>
 </table>

@@ -9,19 +9,19 @@
 </head>
 <body>
 	<%
+	String rqNum=request.getParameter("rqNum");
 	int num=0;
-	String play=request.getParameter("play");
-	if(play==null){
+	if(rqNum==null){
 		Random rd = new Random();
 		num=rd.nextInt(20)+1;
 	}else{
-		num=Integer.parseInt(play);
+		num=Integer.parseInt(rqNum);
 	}
 	%>
 	치트키 : <%=num%>
 	<h1>Up Down 게임</h1>
 	<h2>1~20사이에 값 입력</h2>
-<form action="updownGamePlaypro.jsp" method="post">
+<form action="updownGamePlaypro.jsp?play='playing'" method="post">
 	<input type="hidden" name="result" value=<%=num%>>
 	<input type="text" name="answer" value="0">
 	<input type="submit" value="확인">
