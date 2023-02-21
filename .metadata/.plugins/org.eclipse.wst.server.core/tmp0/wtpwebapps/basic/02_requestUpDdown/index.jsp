@@ -12,12 +12,10 @@ font-size: 30px;
 font-weight:bold;
 text-decoration-line:none;
 }
-
 </style>
 </head>
 <body>
 <h1>Up Down 게임</h1>
-
 <a href="updownGamePlay.jsp">[게임 시작]</a>
 </body>
 </html>

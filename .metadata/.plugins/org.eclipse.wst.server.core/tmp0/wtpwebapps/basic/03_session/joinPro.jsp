@@ -16,7 +16,6 @@
 	session.setAttribute("name", name);
 	session.setAttribute("id", id);
 	session.setAttribute("pw", pw);
-	
 %>
 
 </body>
