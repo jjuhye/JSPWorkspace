@@ -1,0 +1,35 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" href="./member.css">
+</head>
+<body>
+<%
+String idList[]=(String[])session.getAttribute("idList");
+String pwList[]=(String[])session.getAttribute("pwList");
+String nameList[]=(String[])session.getAttribute("nameList");
+String genderList[]=(String[])session.getAttribute("genderList");
+%>
+<h1> 로그인 페이지 </h1>
+
+<table border="1">
+    <tr>
+		<td>아이디</td>
+        <td><input type="text" name="loginId"></td>
+    </tr>
+    <tr>
+        <td>비밀번호</td>
+        <td><input type="text" name="loginPw"></td>
+    </tr>
+    <tr>
+    <td colspan="2"><input type="submit" value="로그인" onclick=""/></td>
+    </tr>
+</table>
+<br>
+<input type="submit" value="메인화면" onclick="02_main.jsp"/>
+</body>
+</html>

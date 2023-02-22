@@ -1,0 +1,14 @@
+@charset "UTF-8";
+
+/* table{
+	text-align: center;
+} */
+
+/* tr:nth-child(1){
+	background-color:lightgray;
+	font-weight: bold;
+} */
+
+td{
+	padding: 3px 10px;
+}
