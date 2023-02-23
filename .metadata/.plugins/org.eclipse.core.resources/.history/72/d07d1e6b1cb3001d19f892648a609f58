@@ -1,0 +1,47 @@
+package basic;
+
+import java.util.ArrayList;
+
+public class MemberDAO {
+	
+	private ArrayList<MemberVO> list;
+	private MemberDAO() {
+		list= new ArrayList();
+		setDummy();
+	}
+	
+	static private MemberDAO instance = new MemberDAO();
+	static public MemberDAO getInstance() {
+		return instance;
+	}
+	
+	private void setDummy() {
+		list.add(new MemberVO("admin","admin","관리자","남성"));
+		list.add(new MemberVO("qwer","1111","이만수","남성"));
+		list.add(new MemberVO("abcd","2222","박영희","여성"));
+		list.add(new MemberVO("hello","3333","이수민","여성"));
+	}
+	
+	public int checkId(String loginid) {
+		int idx=list.indexOf(loginid);
+		System.out.println(idx);
+		return idx;
+	}
+	
+	public int checkPw(String pw) {
+		int idx=list.indexOf(pw);
+		return idx;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+}

@@ -1,0 +1,24 @@
+<%@page import="basic.MemberDAO"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<%
+	Object obj = session.getAttribute("idx");
+	System.out.println(obj);
+	
+	String delPw=request.getParameter("delPw");
+
+/* 	if(checkPw(delPw,obj)){
+		
+	}
+	MemberDAO.getInstance().delMember(obj); */
+
+%>
+</body>
+</html>

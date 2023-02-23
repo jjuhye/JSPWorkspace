@@ -21,3 +21,30 @@
 1677029483910	Rename resource '01_2_adminUserList.jsp'
 1677029486363	Rename resource '01_3_adminUserDelete.jsp'
 1677030037918	Delete element
+1677113558849	Rename type 'board'
+1677113813387	Rename type 'boadDAO'
+1677113820574	Rename type 'boardVO'
+1677114288443	Rename compilation unit 'memberDAO.java'
+1677114292307	Rename type 'memberVO'
+1677139074141	Delete element
+1677139481352	Rename resource '05_memberLogin'
+1677139594159	Rename resource '_00_boardList.jsp'
+1677139636469	Copy file
+1677139644983	Copy file
+1677139646275	Copy file
+1677139647003	Copy file
+1677139647611	Copy file
+1677139648299	Copy file
+1677139649234	Copy file
+1677139666058	Rename resource '_0_7.jsp'
+1677139694048	Rename resource '_0_.jsp'
+1677139704995	Rename resource '_0_2.jsp'
+1677139719395	Rename resource '_0_3.jsp'
+1677139731841	Rename resource '_0_4.jsp'
+1677139751387	Rename resource '_0_5.jsp'
+1677139771667	Rename resource '_0_6.jsp'
+1677139885875	Copy compilation units
+1677139895867	Rename type 'MemberDAO2'
+1677139902888	Rename type 'MemberVO2'
+1677142538547	Copy file
+1677142544073	Rename resource 'member.js'
