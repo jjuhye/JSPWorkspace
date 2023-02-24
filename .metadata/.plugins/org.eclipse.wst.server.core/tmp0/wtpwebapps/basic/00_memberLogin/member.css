@@ -4,3 +4,7 @@ td{
 	padding: 2px 10px;
 	text-align:center;
 }
+
+th{
+	font-weight:bold;
+}

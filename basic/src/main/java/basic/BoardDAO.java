@@ -18,13 +18,19 @@ public class BoardDAO {
 	}
 	
 	private void setDummy() {
-		boardList.add(new BoardVO(1,"작성자1","제목1","내용1","2022-02-01"));
-		boardList.add(new BoardVO(2,"작성자2","제목2","내용2","2022-02-02"));
-		boardList.add(new BoardVO(3,"작성자3","제목3","내용3","2022-02-03"));	
+		boardList.add(new BoardVO(newNo(),"작성자1","2022-02-01","제목1","내용1"));
+		boardList.add(new BoardVO(newNo(),"작성자2","2022-02-02","제목2","내용2"));
+		boardList.add(new BoardVO(newNo(),"작성자3","2022-02-03","제목3","내용3"));	
 	}
 	
-	private int getNo() {
-		number=boardList.size();
+	public void addDummy() {
+		for(int i=0; i<10; i++) {
+			int num=newNo();
+			boardList.add(new BoardVO(num,"작성자"+num,"2022-02-22","제목"+num,"내용"+num));
+		}
+	}
+	
+	public int newNo() {
 		number++;
 		return number;
 	}
@@ -37,33 +43,26 @@ public class BoardDAO {
 	//게시글 생성
 	public void newBoard(String name, String title, String content) {
 		BoardVO b=new BoardVO();
-		b.setNo(getNo());
+		b.setNo(newNo());
 		b.setName(name);
 		b.setDate(""+LocalDate.now());
 		b.setTitle(title);
 		b.setContent(content);
 	}
 	
-//	//멤버 목록 생성
-//	public String[][] memberList() {
-//		String[][] member=new String[list.size()][4];
-//		for(int i=0; i<list.size(); i++) {
-//			member[i][0]=list.get(i).getId();
-//			member[i][1]=list.get(i).getPw();
-//			member[i][2]=list.get(i).getName();
-//			member[i][3]=list.get(i).getGender();
-//		}
-//		return member;
-//	}
-//	
-//	//특정 멤버 데이터 전달
-//	public String[] memberData(int idx) {
-//		String[] memberOne=new String[4];
-//		memberOne[0]=list.get(idx).getId();
-//		memberOne[1]=list.get(idx).getPw();
-//		memberOne[2]=list.get(idx).getName();
-//		memberOne[3]=list.get(idx).getGender();
-//		return memberOne;
-//	}
+	//게시글 삭제
+	public void delBoard(String no) {
+		int delNo=Integer.parseInt(no);
+		for (int i = 0; i < boardList.size(); i++) {
+			if(boardList.get(i).getNo()==delNo) {
+				boardList.remove(i);
+			}
+		}
+	}
+	
+	public void delAllBoard() {
+		boardList= new ArrayList<BoardVO>();
+		number=0;
+	}
 	
 }
