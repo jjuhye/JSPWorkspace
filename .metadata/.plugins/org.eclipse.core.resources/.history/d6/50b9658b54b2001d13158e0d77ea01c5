@@ -1,6 +1,0 @@
-@charset "UTF-8";
-table:nth-child(1){
-	background-color:lightgray;
-	text-align: center;
-	font-weight: bold;
-}

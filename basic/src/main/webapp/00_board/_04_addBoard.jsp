@@ -14,18 +14,17 @@
 	<form action="_04_addBoardPro.jsp" method="post">
 	<table border="1">
 		<tr><td>번호</td>
-		<td><%=BoardDAO.getInstance().newNo() %></td></tr>
+		<td><%=BoardDAO.getInstance().getNo()%></td></tr>
 		<tr><td>작성자</td>
-		<td>test</td></tr>	    
+		<td><input type="text" name="writer"></td></tr>
 		<tr><td>제목</td>
-		<td><input name="addTitle"></td></tr>	    
+		<td><input type="text" name="addTitle"></td></tr>	    
 		<tr><td>내용</td>
-		<td><textarea name="addContent"></textarea></td></tr>	    
-		<tr><td colspan="2"><input type="button" name="write" value="작성완료">	    
-	    	<button onclick="location.href='_00_main.jsp'">작성취소</button></td></tr>
-	    		
+		<td><textarea rows="10" cols="20" name="addContent"></textarea></td></tr>	    
+		<tr><td colspan="2"><input type="submit" value="작성완료"></td></tr>   
 	</table><br>
 	</form>
+	    <button onclick="location.href='_00_main.jsp'">작성취소</button>
 </div>
 </body>
 </html>

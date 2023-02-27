@@ -13,7 +13,7 @@
 BoardDAO.getInstance().addDummy();
 %>
 <script>
-msgGo("자료 추가 완료","_00_main.jsp");
+msgGo("더미게시글 추가 완료","_00_main.jsp");
 </script>
 </body>
 </html>

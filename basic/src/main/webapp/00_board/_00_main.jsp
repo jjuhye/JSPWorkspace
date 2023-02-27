@@ -16,7 +16,7 @@
     <div><a href="_03_deleteAllBoard.jsp"> 전체 게시글 삭제하기 </a></div>
     <div><a href="_04_addBoard.jsp"> 게시글 추가하기 </a></div>
     <hr>
-    <div><a href="_07_boardListPaging.jsp"> 페이징 게시판 </a></div>
+    <div><a href="_08_boardListPaging.jsp"> 페이징 게시판 </a></div>
 </div>
 </body>
 </html>

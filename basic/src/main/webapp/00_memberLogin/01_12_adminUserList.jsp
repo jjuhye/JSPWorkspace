@@ -14,7 +14,7 @@
 <div align="center">
 	<h1> 관리자 페이지(회원정보 확인하기) </h1>
 	<table border="1">
-	    <tr><th>번호</th><th>작성자</th><th>작성일</th><th>제목</th><th>내용</th><th>삭제</th></tr>
+	    <tr><th>아이디</th><th>패스워드</th><th>이름</th><th>성별</th><th>삭제</th></tr>
 	    
 	    <%
 		request.setCharacterEncoding("utf-8");

@@ -12,21 +12,24 @@
 </head>
 <body>
 <%
-ArrayList<BoardVO> list=BoardDAO.getInstance().getList();
+/* ArrayList<BoardVO> list=BoardDAO.getInstance().getList(); */
+int size=BoardDAO.getInstance().getSize();
 %>
 <div>
 	<h1> 게시판 </h1>
-	전체 게시글 수 : <%=list.size()%>
+<%-- 	전체 게시글 수 : <%=list.size()%> --%>
+	전체 게시글 수 : <%=size%>
 	<table border="1">
    	    <tr><th>번호</th><th>작성자</th><th>작성일</th><th>제목</th><th>내용</th><th>삭제</th></tr>
 	    
 	    <%
-	    for(int i=0; i<list.size(); i++){ 
+	    for(int i=0; i<size; i++){ 
+		String[] list=BoardDAO.getInstance().readBoard(i);
 	    %>
-	    	<tr><td><%=list.get(i).getNo()%></td><td><%=list.get(i).getName() %></td>
-	    	<td><%=list.get(i).getDate() %></td><td><%=list.get(i).getTitle() %></td>
-	    	<td><%=list.get(i).getContent() %>
-	    	<td><button onclick="location.href='_06_deleteBoardPro.jsp?delNo=<%=list.get(i).getNo() %>'">삭제하기</button></td>
+	    	<tr><td><%=list[0]%></td><td><%=list[1] %></td>
+	    	<td><%=list[2] %></td><td><a href="_05_updateBoard.jsp?upIdx=<%=i%>"><%=list[3]%></a></td></td>
+	    	<td><%=list[4] %>
+	    	<td><button onclick="location.href='_06_deleteBoardPro.jsp?delNo=<%=i %>'">삭제하기</button></td>
 	    		
 	    <%}%>
 	</table><br>

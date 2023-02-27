@@ -2,3 +2,4 @@
 		alert(msg);
 		location.href=url;
 	}
+	

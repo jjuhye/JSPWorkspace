@@ -10,11 +10,19 @@
 </head>
 <body>
 <%
-String no=request.getParameter("delNo");
+int no=Integer.parseInt(request.getParameter("delNo"));
 BoardDAO.getInstance().delBoard(no);
+String stt = request.getParameter("pg");
+if(stt==null){
 %>
 <script>
 msgGo("게시글 삭제 완료","_01_boardList.jsp");
 </script>
+<%}else{%>
+<input type="hidden" name="start" value=stt>
+<script>
+msgGo("게시글 삭제완료","_08_boardListPaging.jsp");
+</script>
+<%}%>
 </body>
 </html>
