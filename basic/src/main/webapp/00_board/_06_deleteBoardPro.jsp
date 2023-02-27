@@ -19,9 +19,9 @@ if(stt==null){
 msgGo("게시글 삭제 완료","_01_boardList.jsp");
 </script>
 <%}else{%>
-<input type="hidden" name="start" value=stt>
+<!-- <input type="hidden" name="start" value=stt> -->
 <script>
-msgGo("게시글 삭제완료","_08_boardListPaging.jsp");
+msgGo("게시글 삭제완료","_07_boardListPaging.jsp?start=<%=stt%>");
 </script>
 <%}%>
 </body>

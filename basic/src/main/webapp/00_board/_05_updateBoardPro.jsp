@@ -16,7 +16,7 @@
 	String title=request.getParameter("upTitle").trim();
 	String content=request.getParameter("upContent").trim();
 	if(title.equals("") || content.equals("")){%>
-	<script>msgGo("비어 있는 값 저장불가","_05_updateBoard.jsp");	</script>
+	<script>msgGo("비어 있는 값 저장불가","_05_updateBoard.jsp?upIdx=<%=idx%>");	</script>
 	<%} else{
 	BoardDAO.getInstance().updateBoard(idx, title, content);}%>
 	<script>msgGo("게시글 수정완료","_01_boardList.jsp");</script>

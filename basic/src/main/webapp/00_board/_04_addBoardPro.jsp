@@ -20,7 +20,7 @@
 	<script>msgGo("비어 있는 값 저장불가","_04_addBoard.jsp");	</script>
 	<%} else{
 	BoardDAO.getInstance().newBoard(writer, title, content);}%>
-<!-- 	<script>msgGo("게시판 추가완료","_01_boardList.jsp");</script> -->
+	<script>msgGo("게시판 추가완료","_01_boardList.jsp");</script>
 	
 </body>
 </html>

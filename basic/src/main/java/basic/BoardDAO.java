@@ -79,9 +79,9 @@ public class BoardDAO {
 			return board;
 	}
 	
-	public int getIdx (String no) {
+	public int getIdx (int no) {
 		for(int i=0; i<boardList.size(); i++) {
-			if(boardList.get(i).equals(no)) {
+			if(boardList.get(i).getNo()==no) {
 				return i;
 			}
 		}

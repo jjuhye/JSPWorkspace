@@ -12,25 +12,12 @@
 </head>
 <body>
 	<%
-	ArrayList<BoardVO> list = BoardDAO.getInstance().getList();
-		
-		int 전체게시글수 = list.size();
-		
-		int 한페이지에보여줄게시글수 = 5;
-		int 현재페이지번호 = 1;  // 무조건 시작 페이지는 1 페이지 
-		if(request.getParameter("start") != null) {
-			현재페이지번호 = Integer.parseInt(request.getParameter("start"));
-		}
-		
-		
-		int 현재페이지의게시글시작번호 = (현재페이지번호 - 1) * 한페이지에보여줄게시글수;
-		int 현재페이지의게시글마지막번호 = 현재페이지의게시글시작번호 + 한페이지에보여줄게시글수;
-		if(현재페이지의게시글마지막번호 > 전체게시글수) { 
-			현재페이지의게시글마지막번호 = 전체게시글수;
-		}
+	    String curPage = request.getParameter("start");
+		BoardDAO dao = BoardDAO.getInstance();
+		ArrayList<BoardVO> list =dao.getPageData(curPage);
 	%>
 	
-	전체 게시글 수 : <%= 전체게시글수 %>개
+	전체 게시글 수 : <%= dao.getList().size() %>개
 	
 	<table border="1">
 		<tr>
@@ -42,17 +29,17 @@
 			<th>삭제</th>
 		</tr>
 	<%
-		for(int i=현재페이지의게시글시작번호; i<현재페이지의게시글마지막번호; i++) {
-			BoardVO vo = list.get(i);
+		for(int i=0; i<list.size(); i++) {
 	%>	
 		<tr>
-			<td><%= vo.getNo() %></td>
-			<td><%= vo.getName() %></td>
-			<td><%= vo.getDate() %></td>
-			<td><%= vo.getTitle() %></td>
-			<td><%= vo.getContent() %></td>
+			<td><%= list.get(i).getNo() %></td>
+			<td><%= list.get(i).getName() %></td>
+			<td><%= list.get(i).getDate() %></td>
+			<td><%= list.get(i).getTitle() %></td>
+			<td><%= list.get(i).getContent() %></td>
 			<td>
-				<button onclick="window.location.href='_06_deleteBoardPro.jsp?delNo=<%=i %>'">삭제하기</button>
+			<%int idx=BoardDAO.getInstance().getIdx(list.get(i).getNo());%>
+				<button onclick="window.location.href='_06_deleteBoardPro.jsp?delNo=<%=idx%>&pg=<%=curPage%>'">삭제하기</button>
 			</td>
 		</tr>
 	
@@ -65,33 +52,25 @@
 	</table>
 	
 	<%
-		int 전체페이지수 = 전체게시글수 / 한페이지에보여줄게시글수;
-		if(전체게시글수 % 한페이지에보여줄게시글수 > 0) {
-			전체페이지수 += 1;
-		}
-		int 한페이지에보여줄페이지번호개수 = 3;
-		int 한페이지에보여줄페이지시작번호 = 1;
-		//if(request.getParameter("한페이지에보여줄페이지시작번호") != null){
-		if(request.getParameter("end") != null){
-			한페이지에보여줄페이지시작번호 = Integer.parseInt(request.getParameter("end"));
-		}
-		                                                // 배열이 아니니깐 1 빼서 시작 
-		int 한페이지에보여줄페이지마침번호 = 한페이지에보여줄페이지시작번호 + 한페이지에보여줄페이지번호개수 - 1;
-		if(한페이지에보여줄페이지마침번호 > 전체페이지수) {
-			한페이지에보여줄페이지마침번호 = 전체페이지수;
-		}
+  
+		String endPage = request.getParameter("end");
+		int[] nums =dao.addPageNextBefore(endPage); 
+	    int start = nums[0];
+	    int end = nums[1];
+	    int pageLimit = nums[2];
+	    int totalPageNum = nums[3];
 	%>
 	
-	<%  if(한페이지에보여줄페이지시작번호 > 한페이지에보여줄페이지번호개수) { %>
-		[<a href="_07_boardListPaging.jsp?start=<%= 한페이지에보여줄페이지시작번호 - 1 %>&end=<%= 한페이지에보여줄페이지시작번호 - 한페이지에보여줄페이지번호개수 %>">이전</a>]
+	<%  if(start > pageLimit) { %>             <!--  4-1 : 3   -->  <!-- 계속 3으로 유지 4-3 1   -->
+		[<a href="_07_boardListPaging.jsp?start=<%= start - 1 %>&end=<%= start - pageLimit %>">이전</a>]
+	<%	} %>
+	<!-- 1 2 3 -->  <!-- 4 5 6  -->  <!-- end는 페이지 끝 번호  -->
+	<%  for(int i=start; i<=end; i++) { %>
+			[<a href="_07_boardListPaging.jsp?start=<%= i %>&end=<%= start %>"><%= i %></a>]
 	<%	} %>
 	
-	<%  for(int i=한페이지에보여줄페이지시작번호; i<=한페이지에보여줄페이지마침번호; i++) { %>
-			[<a href="_07_boardListPaging.jsp?start=<%= i %>&end=<%= 한페이지에보여줄페이지시작번호 %>"><%= i %></a>]
-	<%	} %>
-	
-	<%  if(한페이지에보여줄페이지마침번호 < 전체페이지수) { %>
-		[<a href="_07_boardListPaging.jsp?start=<%= 한페이지에보여줄페이지시작번호 + 한페이지에보여줄페이지번호개수 %>&end=<%= 한페이지에보여줄페이지시작번호 + 한페이지에보여줄페이지번호개수 %>">이후</a>]
+	<%  if(end < totalPageNum) { %>
+		[<a href="_07_boardListPaging.jsp?start=<%= start + pageLimit %>&end=<%= start + pageLimit%>">이후</a>]
 	<%	} %>
 </body>
 </html>
