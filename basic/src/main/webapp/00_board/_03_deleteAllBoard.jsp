@@ -13,7 +13,7 @@
 BoardDAO.getInstance().delAllBoard();
 %>
 <script>
-msgGo("게시글 전체 삭제 완료","_00_main.jsp");
+msgGo("게시글 전체 삭제 완료","_01_boardList.jsp");
 </script>
 </body>
 </html>

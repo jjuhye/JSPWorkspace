@@ -4,13 +4,7 @@
 
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
-<body>
+ <%@include file= "header.jsp" %>
 	<%
 	    String curPage = request.getParameter("start");
 		BoardDAO dao = BoardDAO.getInstance();
@@ -44,15 +38,9 @@
 		</tr>
 	
 	<%	} %>
-		<tr>
-			<td colspan="6">
-				<button onclick="window.location.href='_00_main.jsp'">메인화면</button>
-			</td>
-		</tr>
 	</table>
 	
 	<%
-  
 		String endPage = request.getParameter("end");
 		int[] nums =dao.addPageNextBefore(endPage); 
 	    int start = nums[0];

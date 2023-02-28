@@ -4,7 +4,7 @@ public class BoardVO {
 	
 	private int no;
 	private String name;
-	private String date;
+	private String regDate;
 	private String title;
 	private String content;
 	
@@ -35,12 +35,12 @@ public class BoardVO {
 		this.name = name;
 	}
 
-	public String getDate() {
-		return date;
+	public String getRegDate() {
+		return regDate;
 	}
 
-	public void setDate(String date) {
-		this.date = date;
+	public void setDate(String regDate) {
+		this.regDate = regDate;
 	}
 
 	public String getTitle() {

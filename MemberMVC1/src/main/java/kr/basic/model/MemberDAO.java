@@ -76,16 +76,15 @@ public ArrayList<MemberVO> memberList() {
 		   String phone=rs.getString("phone");
 		   // 묶고->담고
 		   MemberVO vo=new MemberVO(num, id, pass, name, age, email, phone);
-		   list.add(vo);		   
+		   list.add(vo);
 	   }
 	 } catch (Exception e) {
-    e.printStackTrace();
+		 e.printStackTrace();
 	 }finally {
-		dbClose();
+		 dbClose();
 	 }	 
 	 return list;
 }//memberList
-
 
 public String checkMemberId(String id) {
 	 String SQL="select pass from member where id=?";
@@ -124,8 +123,6 @@ public int getMemberNo(String id) {
 	}	   
 	 return -1;
 }
-
-
 
 public int memberDelete(String id) {
 	 String SQL="delete from member where id=?";
