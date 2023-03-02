@@ -1,4 +1,4 @@
-<%@page import="basic.MemberDAO"%>
+<%@page import="kr.basic.model.MemberDAO"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"

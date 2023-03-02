@@ -1,4 +1,5 @@
-<%@page import="basic.BoardDAO"%>
+<%@page import="java.io.Console"%>
+<%@page import="kr.basic.model.BoardDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -9,19 +10,22 @@
 <script type="text/javascript" src="./board.js"></script>
 </head>
 <body>
+
 <%
-int no=Integer.parseInt(request.getParameter("delNo"));
+String tempNo=request.getParameter("delNo").trim();
+/* int no=Integer.parseInt(request.getParameter("delNo")); */
+int no=Integer.parseInt(tempNo);
 BoardDAO.getInstance().delBoard(no);
-String stt = request.getParameter("pg");
-if(stt==null){
+String curPage=request.getParameter("start");
+System.out.println(curPage);
+if(curPage==null){
 %>
 <script>
 msgGo("게시글 삭제 완료","_01_boardList.jsp");
 </script>
 <%}else{%>
-<!-- <input type="hidden" name="start" value=stt> -->
 <script>
-msgGo("게시글 삭제완료","_07_boardListPaging.jsp?start=<%=stt%>");
+msgGo("게시글 삭제완료","_07_boardListPaging.jsp?start=<%=curPage%>");
 </script>
 <%}%>
 </body>

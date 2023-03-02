@@ -1,4 +1,4 @@
-<%@page import="basic.BoardDAO"%>
+<%@page import="kr.basic.model.BoardDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -12,13 +12,13 @@
 	<%
 	request.setCharacterEncoding("utf-8");
 	
-	int idx=Integer.parseInt(request.getParameter("idx"));
+	int no=Integer.parseInt(request.getParameter("upNum"));
 	String title=request.getParameter("upTitle").trim();
 	String content=request.getParameter("upContent").trim();
 	if(title.equals("") || content.equals("")){%>
-	<script>msgGo("비어 있는 값 저장불가","_05_updateBoard.jsp?upIdx=<%=idx%>");	</script>
+	<script>msgGo("비어 있는 값 저장불가","_05_updateBoard.jsp?upNum=<%=no%>");	</script>
 	<%} else{
-	BoardDAO.getInstance().updateBoard(idx, title, content);}%>
+	BoardDAO.getInstance().updateBoard(no, title, content);}%>
 	<script>msgGo("게시글 수정완료","_01_boardList.jsp");</script>
 </body>
 </html>

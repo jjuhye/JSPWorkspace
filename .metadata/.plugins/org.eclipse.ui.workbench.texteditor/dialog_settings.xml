@@ -6,12 +6,16 @@
 		<item key="wholeword" value="false"/>
 		<item key="incremental" value="false"/>
 		<item key="isRegEx" value="false"/>
-		<item key="selection" value="title"/>
+		<item key="selection" value="mbList()"/>
 		<list key="findhistory">
+			<item value="list"/>
+			<item value="addPa"/>
 			<item value="age"/>
 			<item value="member"/>
 		</list>
 		<list key="replacehistory">
+			<item value="mbList()"/>
+			<item value="mbList"/>
 			<item value="title"/>
 			<item value="board"/>
 		</list>

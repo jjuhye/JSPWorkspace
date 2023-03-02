@@ -1,5 +1,5 @@
-<%@page import="basic.BoardDAO"%>
-<%@page import="basic.BoardVO"%>
+<%@page import="kr.basic.model.BoardDAO"%>
+<%@page import="kr.basic.model.BoardVO"%>
 <%@page import="java.util.ArrayList"%>
 
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -8,10 +8,10 @@
 	<%
 	    String curPage = request.getParameter("start");
 		BoardDAO dao = BoardDAO.getInstance();
-		ArrayList<BoardVO> list =dao.getPageData(curPage);
+		ArrayList<BoardVO> list=dao.getPageData(curPage);
 	%>
 	
-	전체 게시글 수 : <%= dao.getList().size() %>개
+	전체 게시글 수 : <%= dao.boardList().size() %>개
 	
 	<table border="1">
 		<tr>
@@ -28,12 +28,12 @@
 		<tr>
 			<td><%= list.get(i).getNo() %></td>
 			<td><%= list.get(i).getName() %></td>
-			<td><%= list.get(i).getDate() %></td>
+			<td><%= list.get(i).getRegDate() %></td>
 			<td><%= list.get(i).getTitle() %></td>
 			<td><%= list.get(i).getContent() %></td>
 			<td>
-			<%int idx=BoardDAO.getInstance().getIdx(list.get(i).getNo());%>
-				<button onclick="window.location.href='_06_deleteBoardPro.jsp?delNo=<%=idx%>&pg=<%=curPage%>'">삭제하기</button>
+<%-- 	<%int idx=BoardDAO.getInstance().getIdx(list.get(i).getNo());%>  --%>
+				<button onclick="window.location.href='_06_deleteBoardPro.jsp?delNo=<%=list.get(i).getNo()%> &start=<%=curPage%>'">삭제하기</button>
 			</td>
 		</tr>
 	

@@ -11,6 +11,10 @@
     <fullyQualifiedTypeName name="java.lang.ClassNotFoundException"/>
     <fullyQualifiedTypeName name="java.sql.Connection"/>
     <fullyQualifiedTypeName name="java.sql.SQLException"/>
-    <fullyQualifiedTypeName name="java.util.ArrayList"/>
     <fullyQualifiedTypeName name="basic.BoardVO"/>
+    <fullyQualifiedTypeName name="com.sun.org.apache.xalan.internal.xsltc.dom.ArrayNodeListIterator"/>
+    <fullyQualifiedTypeName name="java.awt.List"/>
+    <fullyQualifiedTypeName name="java.util.ArrayList"/>
+    <fullyQualifiedTypeName name="javax.servlet.http.HttpServletRequest"/>
+    <fullyQualifiedTypeName name="kr.basic.controller.Controller"/>
 </qualifiedTypeNameHistroy>

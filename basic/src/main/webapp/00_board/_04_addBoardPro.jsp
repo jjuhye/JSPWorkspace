@@ -1,4 +1,4 @@
-<%@page import="basic.BoardDAO"%>
+<%@page import="kr.basic.model.BoardDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -19,7 +19,8 @@
 	if(writer.equals("") || title.equals("") || content.equals("")){%>
 	<script>msgGo("비어 있는 값 저장불가","_04_addBoard.jsp");	</script>
 	<%} else{
-	BoardDAO.getInstance().newBoard(writer, title, content);}%>
+		BoardDAO.getInstance().newBoard(writer, title, content);
+	}%>
 	<script>msgGo("게시판 추가완료","_01_boardList.jsp");</script>
 	
 </body>
