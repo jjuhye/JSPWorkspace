@@ -2,7 +2,6 @@
 <qualifiedTypeNameHistroy>
     <fullyQualifiedTypeName name="java.time.LocalDate"/>
     <fullyQualifiedTypeName name="javax.security.auth.message.callback.PrivateKeyCallback.Request"/>
-    <fullyQualifiedTypeName name="javax.servlet.RequestDispatcher"/>
     <fullyQualifiedTypeName name="kr.basic.controller.Member"/>
     <fullyQualifiedTypeName name="com.sun.jdi.connect.spi.Connection"/>
     <fullyQualifiedTypeName name="java.sql.PreparedStatement"/>
@@ -14,7 +13,16 @@
     <fullyQualifiedTypeName name="basic.BoardVO"/>
     <fullyQualifiedTypeName name="com.sun.org.apache.xalan.internal.xsltc.dom.ArrayNodeListIterator"/>
     <fullyQualifiedTypeName name="java.awt.List"/>
-    <fullyQualifiedTypeName name="java.util.ArrayList"/>
     <fullyQualifiedTypeName name="javax.servlet.http.HttpServletRequest"/>
     <fullyQualifiedTypeName name="kr.basic.controller.Controller"/>
+    <fullyQualifiedTypeName name="java.lang.ModuleLayer.Controller"/>
+    <fullyQualifiedTypeName name="java.util.HashMap"/>
+    <fullyQualifiedTypeName name="java.util.ArrayList"/>
+    <fullyQualifiedTypeName name="member.model.MemberVO"/>
+    <fullyQualifiedTypeName name="member.model.MemberDAO"/>
+    <fullyQualifiedTypeName name="javax.servlet.http.HttpSession"/>
+    <fullyQualifiedTypeName name="member.frontcontroller.HandlerMapping"/>
+    <fullyQualifiedTypeName name="member.controller.Controller"/>
+    <fullyQualifiedTypeName name="javax.servlet.RequestDispatcher"/>
+    <fullyQualifiedTypeName name="member.frontcontroller.ViewResolver"/>
 </qualifiedTypeNameHistroy>
