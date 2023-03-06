@@ -1,5 +1,5 @@
-<%@page import="kr.basic.model.BoardDAO"%>
-<%@page import="kr.basic.model.BoardVO"%>
+<%@page import="board.model.BoardDAO"%>
+<%@page import="board.model.BoardVO"%>
 <%@page import="java.util.ArrayList"%>
 
 <%@ page language="java" contentType="text/html; charset=UTF-8"

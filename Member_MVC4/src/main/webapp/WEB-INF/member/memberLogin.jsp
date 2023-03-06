@@ -2,7 +2,6 @@
     pageEncoding="UTF-8"%>
 <%@ include file= "../../header.jsp" %>
 <script type="text/javascript"> 
-
 function check(){
 	  if($('#user_id').val()==''){
 		  alert("아이디를 입력하세요");
