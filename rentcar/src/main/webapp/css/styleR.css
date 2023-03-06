@@ -1,0 +1,30 @@
+@charset "UTF-8";
+
+*{
+	text-align: center;
+}
+
+html, body {
+   width: 100%;
+   height: 100%;
+} 
+         
+header div[id=menu]{
+		background: #ffd0d0;
+		font-size:18px;
+		font-weight: 600;
+}
+
+div[id=menu]:hover{
+	background: #ff8080;
+	color: white;
+	cursor: pointer;
+}
+
+input {
+	text-align: left;
+}
+
+.left{
+	text-align: left;
+}
