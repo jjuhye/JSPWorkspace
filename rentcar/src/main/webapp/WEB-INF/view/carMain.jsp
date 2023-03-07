@@ -1,7 +1,5 @@
  <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<div align="center">
 <jsp:include page="top.jsp"/>
-<jsp:include page="${center}"/>
+<div align="center"><img src="img/17.jpg" width="100%" ></div>
 <jsp:include page="bottom.jsp"/>
-</div>

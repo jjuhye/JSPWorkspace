@@ -9,7 +9,8 @@ public class HandlerMapping {
 	public HandlerMapping() {
 		mapping=new HashMap<String, Controller>();
 		mapping.put("/main.do", new MainController());
-		mapping.put("/memberLogin.do", new  MemberLoginController());
+		mapping.put("/login.do", new LoginController());
+		mapping.put("/logout.do", new LogoutController());
 	}
 	
 	public Controller getController(String key) {

@@ -1,4 +1,5 @@
 --create database rentcardb;
+--drop table member;
 delete from rentcar;
 USE rentcardb;
 -- rentcar 테이블 생성
@@ -16,7 +17,7 @@ CREATE TABLE rentcar(
 -- member 테이블 생성
 CREATE TABLE member(
 	id VARCHAR(20),
-    pw1 VARCHAR(20),
+    pw VARCHAR(20),
     email VARCHAR(50),
     tel VARCHAR(20),
     hobby VARCHAR(60),

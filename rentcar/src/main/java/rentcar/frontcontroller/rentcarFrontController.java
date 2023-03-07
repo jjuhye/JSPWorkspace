@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import rentcar.controller.Controller;
 
+@SuppressWarnings("serial")
 @WebServlet("*.do")
 public class rentcarFrontController extends HttpServlet {
 

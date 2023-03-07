@@ -69,14 +69,14 @@ public class RentcarDAO {
 		return list;
 	}
 	
-	public Boolean checkIdPw(String id, String pw) {
+	public int checkIdPw(String id, String pw) {
 		ArrayList<MemberVO> list=memberList();
 		for(int i=0; i<list.size(); i++) {
 			if(list.get(i).getId().equals(id) && list.get(i).getPw().equals(pw)) {
-				return true;
+				return 1;
 			}
 		}
-		return false;
+		return 0;
 	}
 	
 	public int getMemberNo(String id) {
@@ -98,5 +98,30 @@ public class RentcarDAO {
 		 return -1;
 	}
 	
+	// 로그인 폼 처리(loginPro.java)페이지의 사용자 인증 처리 및 ajax 
+//	public int userCheck(String id, String pw) {
+//		int x = 0;
+//		try {
+//			getConnect();
+//			ps = conn.prepareStatement("SELECT pw FROM member WHERE id=?");
+//			ps.setString(1, id);
+//			rs = ps.executeQuery();
+//
+//			if (rs.next()) {// 해당 아이디가 있으면 수행
+//				String dbPasswd = rs.getString(1);
+//				if(pw.equals(dbPasswd)) {
+//					x = 1; // 인증성공
+//				}
+//			} else {// 해당 아이디 없으면 수행
+//				x = -1;// 아이디 없음
+//			}
+//		} catch (Exception ex) {
+//			ex.printStackTrace();
+//		} finally {
+//			dbClose();
+//		}
+//		return x;
+//	}
+//	
 	//////////////
 }

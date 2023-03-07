@@ -6,23 +6,19 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import rentcar.frontcontroller.ViewResolver;
-
 public class MainController implements Controller {
 
 	@Override
 	public String requestHandler(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		String center=request.getParameter("center");
+		request.setCharacterEncoding("utf-8");
 		
-		if(center==null) {
-			center="center";
+		String center="carMain";
+		
+		if(request.getParameter("center")!=null) {
+			center=request.getParameter("center");
 		}
-		center=ViewResolver.makeView(center);
-		request.setAttribute("center", center);
-		return "carMain";
+		return center;
 	}
-	
-	
 
 }
