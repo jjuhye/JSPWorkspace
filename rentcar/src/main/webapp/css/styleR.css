@@ -2,6 +2,7 @@
 
 *{
 	text-align: center;
+	font-family: 'Gowun Dodum', sans-serif;
 }
 
 html, body {
@@ -25,6 +26,19 @@ input {
 	text-align: left;
 }
 
+select option[disabled]{
+	display: none;
+	color:red;
+}
+
 .left{
 	text-align: left;
 }
+
+p.card-text{
+	text-decoration: underline;
+}
+
+/* .card-img-top{
+	aspect-ratio: 4 / 3;
+} */

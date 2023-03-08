@@ -3,23 +3,49 @@
     
 <jsp:include page="top.jsp"/>
 
-<form action="carView.do" method="post">
-	<font size="4" color="gray"><b>차량 검색하기</b></font>&nbsp;&nbsp;
-	<select class="pb-1" name="carType">
-		<option value="1">전체</option>
-		<option value="2">소형</option>
-		<option value="3">중형</option>
-		<option value="4">대형</option>
-	</select>
-	<input type="button" value="검색" class="btn btn-outline-secondary btn-sm py-1"/>
-</form>
-<hr color=gray>
+<!-- <script>
+	$(document).ready(function() {
+		let text=request.getAttribute('text');
+		alert("carText: "+text);
+		$('#carView').append(text);
+		$("#search").click(function() {
+			$("#carKind option:selected").val();
+			let searchVal=$("#carKind option:selected").val();
+			$.ajax({
+				type : "get",
+				url : "carView.do",
+				data : searchVal,
+				success : function(data) {
+					let innerText=data.value;
+					alert(innerText);
+					$('#carView').append(innerText);
+				}
+			});
+		});
+	});
+</script>  -->
 
-<div align="center" class="row p-2" id="carView">
-	<h2 class="py-3"style="color: gray; font-weight:bold">최신형 자동차</h2>
-	<div class="col-4"><img src="img/rent_logo.jpg" width="90%" height="100%" onclick="location.href ='${ctx}/main.do'" style="cursor:pointer"><br><br>차량명: 올란도</div>
-	<div class="col-4"><img src="img/rent_logo.jpg" width="90%" height="100%" onclick="location.href ='${ctx}/main.do'" style="cursor:pointer"><br><br>차량명: 올란도</div>
-	<div class="col-4"><img src="img/rent_logo.jpg" width="90%" height="100%" onclick="location.href ='${ctx}/main.do'" style="cursor:pointer"><br><br>차량명: 올란도</div>
+<form action="carView.do" method="post">
+	<div class="row pt-3 px-3">
+		<div class="col-9"></div>
+		<div class="col-3">
+			<div class="input-group">
+				<label class="input-group-text" for="inputGroupSelect01">차량 검색</label>
+			  	<select class="form-select" name="data">
+				    <option value="1">소형</option>
+				    <option value="2">중형</option>
+				    <option value="3">대형</option>
+				    <option value="4" selected>전체</option>
+			  	</select>
+			  <input class="btn btn-outline-secondary" type="submit" id="search" value="검색"/>
+			</div>
+		</div>
+	</div>
+</form>
+<hr class="mx-3" color=gray>
+
+<div align="center" id="carView">
+${text}
 </div>
 
 <jsp:include page="bottom.jsp"/>

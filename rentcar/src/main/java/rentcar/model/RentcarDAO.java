@@ -98,30 +98,112 @@ public class RentcarDAO {
 		 return -1;
 	}
 	
-	// 로그인 폼 처리(loginPro.java)페이지의 사용자 인증 처리 및 ajax 
-//	public int userCheck(String id, String pw) {
-//		int x = 0;
-//		try {
-//			getConnect();
-//			ps = conn.prepareStatement("SELECT pw FROM member WHERE id=?");
-//			ps.setString(1, id);
-//			rs = ps.executeQuery();
-//
-//			if (rs.next()) {// 해당 아이디가 있으면 수행
-//				String dbPasswd = rs.getString(1);
-//				if(pw.equals(dbPasswd)) {
-//					x = 1; // 인증성공
-//				}
-//			} else {// 해당 아이디 없으면 수행
-//				x = -1;// 아이디 없음
-//			}
-//		} catch (Exception ex) {
-//			ex.printStackTrace();
-//		} finally {
-//			dbClose();
-//		}
-//		return x;
-//	}
-//	
+	public String getRecentCar() {
+		String carData="<h2 class=\"py-3\"style=\"color: gray\">최신형 자동차</h2>"
+					 + "<div class=\"row row-cols-1 px-5 row-cols-md-3 g-4\">";
+		
+		String SQL="select * from rentcar order by no desc limit 3";
+		getConnect();
+		try {
+		   ps=conn.prepareStatement(SQL);
+		   rs=ps.executeQuery();
+			while(rs.next()) {
+				int no=rs.getInt("no");
+				String img=rs.getString("img");
+				String name =rs.getString("name");
+				int usepeople=rs.getInt("usepeople");
+				carData+="<div class=\"col\">"
+						+"<div class=\"card p-2 h-100\" onclick=\"location.href='reserve.do?no="+no+"\'\" style=\"cursor:pointer\">"
+						+"<img src=\"img/"+img+"\" style=\"width: 100%\" class=\"card-img-top\">"
+						+"<div class=\"card-body\"><h5>"+name+"</h5>"
+						+"<p class=\"card-text\">대여 가능 차량 : "+usepeople+"대</p></div></div></div>";
+				System.out.println(carData);
+			}
+			return carData;
+		 } catch (Exception e) {
+			e.printStackTrace();
+		 }finally {
+			dbClose();
+		}
+		return null;
+	}
+	
+	public String viewCarPage(String kindNo) {
+		String kind="";
+		if(kindNo.equals("1")) {
+			kind="소형 ";
+		}else if(kindNo.equals("2")) {
+			kind="중형 ";
+		}else if(kindNo.equals("3")) {
+			kind="대형 ";
+		}else {
+			kind="전체 ";
+			kindNo="4";
+		}
+		String carData="<h2 class=\"py-3\"style=\"color: gray\">" + kind + "자동차</h2>"
+					 + "<div class=\"row row-cols-1 px-5 row-cols-md-3 g-4\">";
+		String SQL="";
+		
+		getConnect();
+		try {
+			if(kindNo.equals("4")){
+				SQL="select * from rentcar order by no desc";
+				ps=conn.prepareStatement(SQL);
+			} else {
+				SQL="select * from rentcar where category=? order by no desc";
+				ps=conn.prepareStatement(SQL);
+				ps.setString(1, kindNo);
+			}
+		   rs=ps.executeQuery();
+			while(rs.next()) {
+				int no=rs.getInt("no");
+				String img=rs.getString("img");
+				String name =rs.getString("name");
+				int usepeople=rs.getInt("usepeople");
+				carData+="<div class=\"col\">"
+						+"<div class=\"card p-2 h-100\" onclick=\"location.href='reserve.do?no="+no+"\'\" style=\"cursor:pointer\">"
+						+"<img src=\"img/"+img+"\" style=\"width: 100%\" class=\"card-img-top\">"
+						+"<div class=\"card-body\"><h5>"+name+"</h5>"
+						+"<p class=\"card-text\">대여 가능 차량 : "+usepeople+"대</p></div></div></div>";
+				System.out.println(carData);
+			}
+			return carData;
+		 } catch (Exception e) {
+			e.printStackTrace();
+		 }finally {
+			dbClose();
+		}
+		return null;
+	}
+	
+	public ArrayList<CarVO> carList() {
+	ArrayList<CarVO> list=new ArrayList<CarVO>();
+	String SQL="select * from rentcar order by no desc";
+	getConnect();
+	try {
+	   ps=conn.prepareStatement(SQL);
+	   rs=ps.executeQuery();
+		while(rs.next()) {
+			int no=rs.getInt("no");
+			String name =rs.getString("name");
+			int category=rs.getInt("category");
+			int price=rs.getInt("price");
+			int usepeople=rs.getInt("usepeople");
+			String company=rs.getString("company");
+			String img=rs.getString("img");
+			String info=rs.getString("info");
+			
+			CarVO vo=new CarVO(no,name,category,price,usepeople,company,img,info);
+			list.add(vo);
+			}
+			return list;
+		 } catch (Exception e) {
+			e.printStackTrace();
+		 }finally {
+			dbClose();
+		}
+		return null;
+	}
+	
 	//////////////
 }
