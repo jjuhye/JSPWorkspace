@@ -12,6 +12,8 @@ public class HandlerMapping {
 		mapping.put("/login.do", new LoginController());
 		mapping.put("/logout.do", new LogoutController());
 		mapping.put("/carView.do", new CarViewController());
+		mapping.put("/reserve.do", new CarReserveController());
+		/* mapping.put("/rsvCheck.do", new CarReserveController()); */
 	}
 	
 	public Controller getController(String key) {

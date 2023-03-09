@@ -26,12 +26,11 @@
 				<div class="pt-4"><span>${id}님</span>  
 				 <button onclick="location.href='${ctx}/logout.do'" class="btn btn-outline-secondary btn-sm">로그아웃</button></div>
 			</c:if>
-			
 		</div>
 		<div class="row">
 			<div id="menu" class="col-3  py-3" onclick="location.href='carView.do?data=recent'">예약하기</div>
 			
-			<div id="menu" class="col-2  py-3" onclick="location.href='main.do?center=carReserveView'">예약확인</div>
+			<div id="menu" class="col-2  py-3" onclick="location.href='reserve.do?rsvStep=done'">예약확인</div>
 			<div id="menu" class="col-2  py-3" onclick="location.href='#' ">자유게시판</div>
 			<div id="menu" class="col-2  py-3" onclick="location.href='#'">이벤트</div>
 			<div id="menu" class="col-3  py-3" onclick="location.href='#'">고객센터</div>

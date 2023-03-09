@@ -1,29 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>    
 <jsp:include page="top.jsp"/>
-
-<!-- <script>
-	$(document).ready(function() {
-		let text=request.getAttribute('text');
-		alert("carText: "+text);
-		$('#carView').append(text);
-		$("#search").click(function() {
-			$("#carKind option:selected").val();
-			let searchVal=$("#carKind option:selected").val();
-			$.ajax({
-				type : "get",
-				url : "carView.do",
-				data : searchVal,
-				success : function(data) {
-					let innerText=data.value;
-					alert(innerText);
-					$('#carView').append(innerText);
-				}
-			});
-		});
-	});
-</script>  -->
+<c:if test="${id eq null}">
+	<script>alert("로그인이 필요합니다");
+	window.location.href = "main.do?center=memberLogin";</script>
+</c:if>
+<c:if test="${id ne null}">
+	<script>window.location.href = "login.do";</script>
+</c:if>
 
 <form action="carView.do" method="post">
 	<div class="row pt-3 px-3">
@@ -45,7 +30,20 @@
 <hr class="mx-3" color=gray>
 
 <div align="center" id="carView">
-${text}
+	<h2 class="py-3" style="color: gray">${kind} 자동차</h2>
+	<div class="row row-cols-1 px-5 row-cols-md-3 g-4">
+	<c:forEach var="vo" items="${list}">
+	<div class="col">
+		<div class="card p-2 h-100" id="${vo.no}" style="cursor:pointer">
+			<img src="img/${vo.img}" style="width: 100%" class="card-img-top">
+			<div class="card-body">
+				<h5>차량명 : ${vo.name}</h5>
+				<p class="card-text">대여 가능 : ${vo.usepeople}대</p>
+			</div>
+		</div>
+	</div>	
+	</c:forEach>
+	</div>
 </div>
 
 <jsp:include page="bottom.jsp"/>

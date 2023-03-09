@@ -18,6 +18,7 @@ public class MainController implements Controller {
 		if(request.getParameter("center")!=null) {
 			center=request.getParameter("center");
 		}
+		System.out.println(center);
 		return center;
 	}
 

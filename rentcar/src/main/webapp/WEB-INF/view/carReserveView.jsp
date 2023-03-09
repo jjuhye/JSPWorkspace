@@ -5,10 +5,25 @@
 
 <script>
 	$(document).ready(function() {
-
-		$("#login").click(function() {
+		let carNo=request.getAttribute("no");
+		/* $(".card-img-top").click(function(){ */
+			alert("#id");
+			if($("#id").length()){
+				$("#revStep1").show();
+				$("#revStep2").hide();
+				/* return response.sendRedirect("/rsvCheck.do"); */
+			}else{
+				alert("로그인이 필요합니다.");
+				/* return request.getRequestDispatcher("/login.do").forward(request, response); */
+			};
+		});
+		
+		$("#nextSelect").click(function() {
 			
-			if (checkIt()) {	//입력폼에 입력한 상황 체크
+			$("#revStep1").hide();
+			$("#revStep2").show();
+		});
+			/* if (checkIt()) {	//입력폼에 입력한 상황 체크
 				//입력된 사용자의 아이디와 비밀번호를 얻어냄
 				let query = {
 					id : $("#id").val(),
@@ -32,7 +47,7 @@
 				});
 			}
 		});
-	});
+	}); */
 	
 /* 	function q1() {
 		// 여기에 코드를 입력하세요
@@ -54,7 +69,7 @@
 	} */
 	
 	//인증되지 않은 사용자 영역에서 사용하는 입력 폼의 입력값 유무 확인
-	function checkIt() {
+/* 	function checkIt() {
 		// trim() : 좌우공백제거
 		if (!$.trim($("#id").val())) {
 			alert("아이디를 입력하세요.");
@@ -67,14 +82,28 @@
 		}else{
 			return true;
 		}
-	}
+	} */
 </script> 
 
 <div align="center">
-	<h2 class="pt-5 pb-2"style="color: gray; font-weight:bold"> 로그인</h2>
-	<div class="py-2" >아 이 디 &nbsp &nbsp<input type="text" id="id"/></div>
-	<div class="py-2"  >비밀번호 &nbsp <input type="text" id="pw"/></div>
-	<div class="py-2"><button id="login" class="btn btn-outline-secondary btn-sm">로그인</button></div>
+	<form action="reserve.do?rsvStep=option" method="post" id="revStep1">
+		<h2 class="py-3"style="color: gray">렌트 예약하기</h2>
+		<div class="row">
+			<div class="col-6">이미지</div>
+			<div class="col-6">
+				<div class="col">
+					<table>
+					<tr class="py-2"><td>차량이름</td><td>이름...</td></tr>
+					<tr><td>차량이름</td><td>이름...</td></tr>
+					<tr><td>차량이름</td><td>이름...</td></tr>
+					<tr><td>차량이름</td><td>이름...</td></tr>
+					<tr><td>차량이름</td><td>이름...</td></tr>
+					<tr><td colspan="2"><input type="submit" value="옵션 선택후 구매하기"/></td></tr>
+					</table>
+				</div>
+			</div>
+		</div>
+	</form>
 </div>
 
 <jsp:include page="bottom.jsp"/>

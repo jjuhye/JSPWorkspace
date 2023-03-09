@@ -66,7 +66,8 @@ INSERT INTO rentcar VALUES (15, '모닝', 1,  23000, 4, '현대', '15.jpg' , '�
 INSERT INTO rentcar VALUES (16, '올라도', 3,  5000, 4, 'BMW', '16.jpg' , '올라도 자동차 입니다.');
 INSERT INTO rentcar VALUES (17, '레이', 2,  4000, 4, '현대', '17.jpg' , '레이 자동차 입니다.');
 INSERT INTO rentcar VALUES (18, 'SM5', 1,  2700, 4, 'BMW', '18.jpg' , 'SM5 자동차 입니다.');
---select * from rentcar where category="1" order by no desc;
+select * from rentcar where category="1" order by no desc limit 3;
+select * from rentcar where usepeople>0 order by no desc limit 3;
 -- DELETE from rentcar where no=2;
 -- UPDATE rentcar SET no = no -1 WHERE name = 'SM5';
 -- SELECT * FROM rentcar ORDER BY no;
