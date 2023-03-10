@@ -18,27 +18,22 @@ public class CarViewController implements Controller {
 
 		ArrayList<CarVO> list = new ArrayList<CarVO>();
 		String data = request.getParameter("data");
-		if(data.equals("recent")) {
-			list=RentcarDAO.getInstance().getRecentCar();
-			request.setAttribute("kind","최신형");
+		String kind="";
+		if(data.equals("r")) {
+			kind="최신형";
 		}else if(data.equals("1")) {
-			//소형 차 리스트
-			list=RentcarDAO.getInstance().viewCarPage("1");
-			request.setAttribute("kind","소형");
+			kind="소형";
 		}else if(data.equals("2")) {
-			//중형 차 리스트
-			list=RentcarDAO.getInstance().viewCarPage("2");
-			request.setAttribute("kind","중형");
+			kind="중형";
 		}else if(data.equals("3")){
-			//대형 차 리스트
-			list=RentcarDAO.getInstance().viewCarPage("3");
-			request.setAttribute("kind","대형");
-		}else if(data.equals("4")){
-			//전체 차 리스트
-			list=RentcarDAO.getInstance().viewCarPage("4");
-			request.setAttribute("kind","전체");
+			kind="대형";
+		}else if(data.equals("a")){
+			kind="전체";
 		}
+		list=RentcarDAO.getInstance().viewCarPage(data);
+		
 		request.setAttribute("list",list);
+		request.setAttribute("kind",kind);
 		
 		return "carReserveMain";
 	}

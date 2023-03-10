@@ -28,7 +28,7 @@
 			</c:if>
 		</div>
 		<div class="row">
-			<div id="menu" class="col-3  py-3" onclick="location.href='carView.do?data=recent'">예약하기</div>
+			<div id="menu" class="col-3  py-3" onclick="location.href='carView.do?data=r'">예약하기</div>
 			
 			<div id="menu" class="col-2  py-3" onclick="location.href='reserve.do?rsvStep=done'">예약확인</div>
 			<div id="menu" class="col-2  py-3" onclick="location.href='#' ">자유게시판</div>

@@ -1,109 +1,52 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>  
+
 <jsp:include page="top.jsp"/>
-
-<script>
-	$(document).ready(function() {
-		let carNo=request.getAttribute("no");
-		/* $(".card-img-top").click(function(){ */
-			alert("#id");
-			if($("#id").length()){
-				$("#revStep1").show();
-				$("#revStep2").hide();
-				/* return response.sendRedirect("/rsvCheck.do"); */
-			}else{
-				alert("로그인이 필요합니다.");
-				/* return request.getRequestDispatcher("/login.do").forward(request, response); */
-			};
-		});
+<div class="p-2" align="center" width="100%" >
+		<h2 class="py-5"style="color: gray">렌트카 예약하기</h2>
 		
-		$("#nextSelect").click(function() {
-			
-			$("#revStep1").hide();
-			$("#revStep2").show();
-		});
-			/* if (checkIt()) {	//입력폼에 입력한 상황 체크
-				//입력된 사용자의 아이디와 비밀번호를 얻어냄
-				let query = {
-					id : $("#id").val(),
-					pw : $("#pw").val()
-				};
-	
-				$.ajax({
-					type : "POST",
-					url : "carView.do",
-					data : query,
-					success : function(data) {
-						if(data == 1){
-							alert("로그인성공");
-							window.location.href = "main.do";
-						}else {
-							alert("아이디와 패스워드를 확인해주세요.");
-							$("#id").val("");
-							$("#pw").val("");
-						}	
-					}
-				});
-			}
-		});
-	}); */
-	
-/* 	function q1() {
-		// 여기에 코드를 입력하세요
-		$('#names-q1').empty();
-		$.ajax({
-		type: "GET",
-		url: "http://spartacodingclub.shop/sparta_api/seoulair",
-		data: {},
-		success: function (response) {
-		let rows = response["RealtimeCityAir"]["row"];
-		for (let i = 0; i < rows.length; i++) {
-		let gu_name = rows[i]['MSRSTE_NM'];
-		let gu_mise = rows[i]['IDEX_MVL'];
-		let temp_html = `<li>${gu_name} : ${gu_mise}</li>`
-		$('#names-q1').append(temp_html);
-		}
-		}
-		})
-	} */
-	
-	//인증되지 않은 사용자 영역에서 사용하는 입력 폼의 입력값 유무 확인
-/* 	function checkIt() {
-		// trim() : 좌우공백제거
-		if (!$.trim($("#id").val())) {
-			alert("아이디를 입력하세요.");
-			$("#id").focus();
-			return false;
-		}else if (!$.trim($("#pw").val())) {
-			alert("비밀번호를 입력하세요.");
-			$("#pw").focus();
-			return false;
-		}else{
-			return true;
-		}
-	} */
-</script> 
-
-<div align="center">
-	<form action="reserve.do?rsvStep=option" method="post" id="revStep1">
-		<h2 class="py-3"style="color: gray">렌트 예약하기</h2>
-		<div class="row">
-			<div class="col-6">이미지</div>
-			<div class="col-6">
+	<form action="reserve.do?page=option" method="post">
+		<div class="row p-3">
+			<div class="col-7 px-4"><img src="img/${car.img}" style="width:100%; border-radius:10px"></div>
+			<div class="col-5 px-4">
 				<div class="col">
-					<table>
-					<tr class="py-2"><td>차량이름</td><td>이름...</td></tr>
-					<tr><td>차량이름</td><td>이름...</td></tr>
-					<tr><td>차량이름</td><td>이름...</td></tr>
-					<tr><td>차량이름</td><td>이름...</td></tr>
-					<tr><td>차량이름</td><td>이름...</td></tr>
-					<tr><td colspan="2"><input type="submit" value="옵션 선택후 구매하기"/></td></tr>
+					<table style="width:100%">
+					<tr><td class="py-3">대여차량</td><td style="font-size:1.4rem; font-weight:bold; color:#ff8080">${car.name}</td></tr>
+					<tr><td class="py-3">대여수량</td>
+					<td >
+						<c:if test="${car.usepeople eq 0}">
+							대여 가능 차량이 없습니다.
+						</c:if>
+						<c:if test="${car.usepeople ne 0}">
+							<select id="qty">
+							<c:forEach var="i" begin="1" end="${car.usepeople}">
+								<option value="${i}">${i}</option>";
+							</c:forEach>
+							</select>
+						</c:if>
+						</td></tr>
+					<tr><td class="py-3">차량분류</td><td>${kind}</td></tr>
+					<tr><td class="py-3">대여가격</td><td>${car.price}</td></tr>
+					<tr><td class="py-3">제조회사</td><td>${car.company}</td></tr>
 					</table>
+					<c:if test="${id eq null}">
+					<div class="py-3" style="color: #ff8080">로그인 후 예약가능합니다.</div>
+					</c:if>
+					<c:if test="${car.usepeople ne 0 && id ne null}">
+					<div class="py-3">
+					<input class="p-2" id="buy" type="submit" value="옵션 선택 후 예약하기 >"/></div>
+					</c:if>
 				</div>
 			</div>
 		</div>
+		<input name="carNo" type="hidden" value="${car.no}"/>
 	</form>
+	<div class="p-3" align="center">
+		<hr class="mx-3" color=gray>
+		<h5 style=" color: #ff8080">차량 상세정보</h5>
+		${car.info}
+	</div>
 </div>
 
 <jsp:include page="bottom.jsp"/>

@@ -97,50 +97,22 @@ public class RentcarDAO {
 		}	   
 		 return -1;
 	}
-	
-	//재고수량 0개 이상인 최근자동차 3대
-	public ArrayList<CarVO> getRecentCar() {
-		ArrayList<CarVO> list=new ArrayList<CarVO>();
-		String SQL="select * from rentcar where usepeople>0 order by no desc limit 3";
-		getConnect();
-		try {
-			ps=conn.prepareStatement(SQL);
-			rs=ps.executeQuery();
-			while(rs.next()) {
-				int no=rs.getInt("no");
-				String name =rs.getString("name");
-				int category=rs.getInt("category");
-				int price=rs.getInt("price");
-				int usepeople=rs.getInt("usepeople");
-				String company=rs.getString("company");
-				String img=rs.getString("img");
-				String info=rs.getString("info");
-				
-				CarVO vo=new CarVO(no,name,category,price,usepeople,company,img,info);
-				list.add(vo);
-			}
-			return list;
-		} catch (Exception e) {
-			e.printStackTrace();
-		}finally {
-			dbClose();
-		}
-		return null;
-	}
-	
 		
-	public ArrayList<CarVO> viewCarPage(String kindNo) {
+	public ArrayList<CarVO> viewCarPage(String data) {
 		ArrayList<CarVO> list=new ArrayList<CarVO>();
-		String SQL="select * from rentcar where usepeople>0 order by no desc limit 3";
 		getConnect();
+		String SQL="";
 		try {
-			if(kindNo.equals("4")){
+			if(data.equals("r")) {
+				SQL="select * from rentcar where usepeople>0 order by no desc limit 3";
+				ps=conn.prepareStatement(SQL);
+			}else if(data.equals("a")){
 				SQL="select * from rentcar order by no desc";
 				ps=conn.prepareStatement(SQL);
-			} else {
+			}else {
 				SQL="select * from rentcar where category=? order by no desc";
 				ps=conn.prepareStatement(SQL);
-				ps.setString(1, kindNo);
+				ps.setString(1, data);
 			}
 			rs=ps.executeQuery();
 			while(rs.next()) {
@@ -165,34 +137,31 @@ public class RentcarDAO {
 		return null;
 	}
 	
-//	public ArrayList<CarVO> carList() {
-//	ArrayList<CarVO> list=new ArrayList<CarVO>();
-//	String SQL="select * from rentcar order by no desc";
-//	getConnect();
-//	try {
-//	   ps=conn.prepareStatement(SQL);
-//	   rs=ps.executeQuery();
-//		while(rs.next()) {
-//			int no=rs.getInt("no");
-//			String name =rs.getString("name");
-//			int category=rs.getInt("category");
-//			int price=rs.getInt("price");
-//			int usepeople=rs.getInt("usepeople");
-//			String company=rs.getString("company");
-//			String img=rs.getString("img");
-//			String info=rs.getString("info");
-//			
-//			CarVO vo=new CarVO(no,name,category,price,usepeople,company,img,info);
-//			list.add(vo);
-//			}
-//			return list;
-//		 } catch (Exception e) {
-//			e.printStackTrace();
-//		 }finally {
-//			dbClose();
-//		}
-//		return null;
-//	}
+	public CarVO getCarData(String carNo) {
+		getConnect();
+		String SQL="select * from rentcar where no=?";
+		try {
+			ps=conn.prepareStatement(SQL);
+			ps.setString(1, carNo);
+			rs=ps.executeQuery();
+			while(rs.next()) {
+				int no=rs.getInt("no");
+				String name =rs.getString("name");
+				int category=rs.getInt("category");
+				int price=rs.getInt("price");
+				int usepeople=rs.getInt("usepeople");
+				String company=rs.getString("company");
+				String img=rs.getString("img");
+				String info=rs.getString("info");
+				CarVO car=new CarVO(no,name,category,price,usepeople,company,img,info);
+				return car;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			dbClose();
+		}
+	return null;
+	}
 	
-	//////////////
 }
