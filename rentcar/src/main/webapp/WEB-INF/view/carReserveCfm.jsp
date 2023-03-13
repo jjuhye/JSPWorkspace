@@ -4,16 +4,21 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 <jsp:include page="top.jsp"/>
-<script>
-function deleteRsv(rsvNo,carNo,qty){
-	if(confirm("예약을 취소하시겠습니까?")){
-		location.href="rsvDel.do?car_no="+carNo+"&rsv_no="+rsvNo+"&qty="+qty}; 
-		alert("예약이 정상적으로 취소되었습니다.");
-	}else{
-		alert("예약이 취소되지 않았습니다.");
-	}
+ <script>
+ 
+ function Delete(seq,no,qta){
+     $.ajax({
+         type : "POST",
+         url : "rsvDel.do",
+         data : {"no":no,"qty":qta,"rsvNo":seq},
+         success : function(data) {
+             alert("삭제완료");
+             window.location.reload();
+             
+         }
+     }); 
 }
-
+ 
 </script>
 
 <div class="p-2" align="center">
@@ -54,8 +59,7 @@ function deleteRsv(rsvNo,carNo,qty){
 						    <td style="vertical-align:middle">${vo.usenavi}</td>
 						    <td style="vertical-align:middle">${vo.useseat}</td>
 						    <td style="vertical-align:middle">
-						    <input type="button" value="삭제" onclick="deleteRsv(${vo.reserve_seq},${vo.no},${vo.qty})">
-<!-- 						    <input name="del" type="button" value="삭제"/></td> -->
+							<input type="button" value="삭제" onclick="Delete('${vo.reserve_seq}','${vo.no}','${vo.qty}')"></td>
 				      	</c:if>
 				      </c:forEach>
 					</tr>

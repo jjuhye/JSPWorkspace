@@ -40,8 +40,6 @@
 					</c:if>
 					<c:if test="${car.usepeople ne 0 && id ne null}">
 					<div class="py-3">
-<%-- 					<input name="carNo" type="hidden" value="${car.no}"/>
-					<input name="kind" type="hidden" value="${kind}"/> --%>
 					<input class="p-2" id="buy" type="submit" value="옵션 선택하기 >>"/></div>
 					</c:if>
 				</div>

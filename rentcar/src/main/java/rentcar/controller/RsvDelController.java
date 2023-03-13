@@ -13,10 +13,10 @@ public class RsvDelController implements Controller {
 	@Override
 	public String requestHandler(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		String rno=request.getParameter("rsv_no");
-		String cno=request.getParameter("car_no");
-		String qt=request.getParameter("qty");
-		RentcarDAO.getInstance().rsvDbDelete(rno,cno,qt);
+		int rsvNo=Integer.parseInt(request.getParameter("rsvNo"));
+		int carNo=Integer.parseInt(request.getParameter("no"));
+		int qty=Integer.parseInt(request.getParameter("qty"));
+		RentcarDAO.getInstance().rsvDbDelete(rsvNo,carNo,qty);
 
 		return "carReserveCfm";
 	}

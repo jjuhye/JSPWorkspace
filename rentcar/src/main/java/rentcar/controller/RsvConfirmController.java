@@ -37,19 +37,17 @@ public class RsvConfirmController implements Controller {
 			int usenavi=Integer.parseInt(request.getParameter("usenavi"));
 			int useseat=Integer.parseInt(request.getParameter("useseat"));
 			
+	    	int n = 0;
+	    	ArrayList<CarReserveVO> list=RentcarDAO.getInstance().getRsvList();
+	    	n=list.size()==0?1:list.get(list.size()-1).getReserve_seq()+1;
+			
 			RentcarDAO.getInstance().addRsvDB
-			(carNoI,id,qtyI,dday,rday,usein,usewifi,usenavi,useseat);
+			(n,carNoI,id,qtyI,dday,rday,usein,usewifi,usenavi,useseat);
 			ArrayList<CarReserveVO> rsv_list=RentcarDAO.getInstance().getListId(id);
 			ArrayList<CarVO> car_list=RentcarDAO.getInstance().getCarList();
 			request.setAttribute("rsv_list", rsv_list);
 			request.setAttribute("car_list", car_list);
 			
-//			if(request.getParameter("rsv_no")!=null) {
-//				String rno=request.getParameter("rsv_no");
-//				String cno=request.getParameter("car_no");
-//				String qt=request.getParameter("qty");
-//				RentcarDAO.getInstance().rsvDbDelete(rno,cno,qt);
-//			}
 			return "carReserveCfm";
 		}
 	}

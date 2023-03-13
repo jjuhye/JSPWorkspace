@@ -15,7 +15,6 @@ public class HandlerMapping {
 		mapping.put("/reserve.do", new CarReserveController());
 		mapping.put("/rsvCfm.do", new RsvConfirmController());
 		mapping.put("/rsvDel.do", new RsvDelController());
-		
 	}
 	
 	public Controller getController(String key) {

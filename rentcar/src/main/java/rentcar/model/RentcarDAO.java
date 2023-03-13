@@ -8,7 +8,7 @@ import java.util.ArrayList;
 
 public class RentcarDAO {
 	private RentcarDAO() {}
-	
+    
 	private static RentcarDAO instance=new RentcarDAO();
 	public static RentcarDAO getInstance() {
 		return instance;
@@ -51,7 +51,7 @@ public class RentcarDAO {
 			rs=ps.executeQuery();
 			while(rs.next()) {
 				String id=rs.getString("id");
-				String pw=rs.getString("pw");
+				String pw=rs.getString("pw1");
 				String email=rs.getString("email");
 				String tel=rs.getString("tel");
 				String hobby=rs.getString("hobby");
@@ -70,6 +70,7 @@ public class RentcarDAO {
 	}
 	
 	public int checkIdPw(String id, String pw) {
+		System.out.println(id+pw);
 		ArrayList<MemberVO> list=memberList();
 		for(int i=0; i<list.size(); i++) {
 			if(list.get(i).getId().equals(id) && list.get(i).getPw().equals(pw)) {
@@ -238,6 +239,13 @@ public class RentcarDAO {
 		return vo;
 	}
 	
+	public int getMaxRsvNum() {
+    	int n = 0;
+    	ArrayList<CarReserveVO> list=getRsvList();
+    	n=list.size()==0?1:list.size()+1;
+    	return n;
+    }
+	
 	//예약 전체 리스트
 	public ArrayList<CarReserveVO> getRsvList() {
 		String SQL="select * from carreserve";
@@ -268,27 +276,28 @@ public class RentcarDAO {
 		return list;
 	}
 	
-	public void addRsvDB(int carNo,String id, int qty, int dday,
+	public void addRsvDB(int revNo, int carNo,String id, int qty, int dday,
 		String rday, int usein, int usewifi, int usenavi, int useseat) {
-		
-		String SQL="insert into carreserve (no,id,qty,dday,rday,usein,usewifi,usenavi,useseat) values(?,?,?,?,?,?,?,?,?)"; 
+		System.out.println(getMaxRsvNum());
+		String SQL="insert into carreserve (reserve_seq,no,id,qty,dday,rday,usein,usewifi,usenavi,useseat) values(?,?,?,?,?,?,?,?,?,?)"; 
 		String SQL2="UPDATE rentcar SET usepeople = usepeople -? WHERE no =?";
 		getConnect();
 		  try {
 			  	ps=conn.prepareStatement(SQL); 
-				ps.setInt(1, carNo);
-				ps.setString(2, id);
-				ps.setInt(3, qty);
-				ps.setInt(4, dday);
-				ps.setString(5, rday);
-				ps.setInt(6, usein);
-				ps.setInt(7, usewifi);
-				ps.setInt(8, usenavi);
-				ps.setInt(9, useseat);
+				ps.setInt(1, revNo);
+				ps.setInt(2, carNo);
+				ps.setString(3, id);
+				ps.setInt(4, qty);
+				ps.setInt(5, dday);
+				ps.setString(6, rday);
+				ps.setInt(7, usein);
+				ps.setInt(8, usewifi);
+				ps.setInt(9, usenavi);
+				ps.setInt(10, useseat);
 				ps.executeUpdate(); 
 			  	ps=conn.prepareStatement(SQL2);
 			  	ps.setInt(1, qty);
-			  	ps.setInt(1, carNo);
+			  	ps.setInt(2, carNo);
 			  	ps.executeUpdate(); 
 		   }catch (Exception e) {
 			e.printStackTrace();
@@ -328,10 +337,10 @@ public class RentcarDAO {
 		return list;
 	}
 	
-	public void rsvDbDelete(String rsvNo, String carNo, String qty) {
-		int rno=Integer.parseInt(rsvNo);
-		int cno=Integer.parseInt(carNo);
-		int qt=Integer.parseInt(qty);
+		public void rsvDbDelete(int rsvNo, int carNo, int qty) {
+		int rno=rsvNo;
+		int cno=carNo;
+		int qt=qty;
 		
 		 String SQL="delete from carreserve where reserve_seq=?";
 		 String SQL2="UPDATE rentcar SET usepeople = usepeople +? WHERE no =?";
