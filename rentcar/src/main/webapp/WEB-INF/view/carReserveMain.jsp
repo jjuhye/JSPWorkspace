@@ -28,7 +28,7 @@
 	<div class="row row-cols-1 px-5 row-cols-md-3 g-4">
 	<c:forEach var="vo" items="${list}">
 	<div class="col">
-		<div class="card p-2 h-100" onclick="location.href='reserve.do?carNo=${vo.no}'" style="cursor:pointer">
+		<div class="card p-2 h-100" onclick="location.href='reserve.do?carNo=${vo.no}&kind=${kind}'" style="cursor:pointer">
 			<img src="img/${vo.img}" style="width: 100%" class="card-img-top">
 			<div class="card-body">
 				<h5>차량명 : ${vo.name}</h5>

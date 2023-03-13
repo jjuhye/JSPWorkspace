@@ -18,18 +18,7 @@ public class CarViewController implements Controller {
 
 		ArrayList<CarVO> list = new ArrayList<CarVO>();
 		String data = request.getParameter("data");
-		String kind="";
-		if(data.equals("r")) {
-			kind="최신형";
-		}else if(data.equals("1")) {
-			kind="소형";
-		}else if(data.equals("2")) {
-			kind="중형";
-		}else if(data.equals("3")){
-			kind="대형";
-		}else if(data.equals("a")){
-			kind="전체";
-		}
+		String kind=RentcarDAO.getInstance().getCarKind(data);
 		list=RentcarDAO.getInstance().viewCarPage(data);
 		
 		request.setAttribute("list",list);

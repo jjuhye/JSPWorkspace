@@ -137,9 +137,38 @@ public class RentcarDAO {
 		return null;
 	}
 	
+	public ArrayList<CarVO> getCarList() {
+		ArrayList<CarVO> list=new ArrayList<CarVO>();
+		getConnect();
+		String SQL="select * from rentcar";
+		try {
+			ps=conn.prepareStatement(SQL);
+			rs=ps.executeQuery();
+			while(rs.next()) {
+				int no=rs.getInt("no");
+				String name =rs.getString("name");
+				int category=rs.getInt("category");
+				int price=rs.getInt("price");
+				int usepeople=rs.getInt("usepeople");
+				String company=rs.getString("company");
+				String img=rs.getString("img");
+				String info=rs.getString("info");
+				
+				CarVO vo=new CarVO(no,name,category,price,usepeople,company,img,info);
+				list.add(vo);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			dbClose();
+		}
+		return list;
+	}
+	
 	public CarVO getCarData(String carNo) {
 		getConnect();
 		String SQL="select * from rentcar where no=?";
+		CarVO car=null;
 		try {
 			ps=conn.prepareStatement(SQL);
 			ps.setString(1, carNo);
@@ -153,15 +182,174 @@ public class RentcarDAO {
 				String company=rs.getString("company");
 				String img=rs.getString("img");
 				String info=rs.getString("info");
-				CarVO car=new CarVO(no,name,category,price,usepeople,company,img,info);
-				return car;
+				car=new CarVO(no,name,category,price,usepeople,company,img,info);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}finally {
 			dbClose();
 		}
-	return null;
+		return car;
+	}
+	
+	public String getCarKind (String category) {
+		if(category.equals("r")) {
+			return "최신형";
+		}else if(category.equals("1")) {
+			return "소형";
+		}else if(category.equals("2")) {
+			return "중형";
+		}else if(category.equals("3")){
+			return "대형";
+		}else {
+			return "전체";
+		}
+	}
+	
+
+	
+	//예약 개별 vo데이터
+	public CarReserveVO getRsvdDB(String seqNo) {
+		getConnect();
+		String SQL="select * from carreserve where reserve_seq=?";
+		CarReserveVO vo=null;
+		try {
+			ps=conn.prepareStatement(SQL);
+			ps.setString(1, seqNo);
+			rs=ps.executeQuery();
+			while(rs.next()) {
+				int seqN=Integer.parseInt(seqNo);
+				int no=rs.getInt("no");
+				String id =rs.getString("id");
+				int qty=rs.getInt("qty");
+				int dday=rs.getInt("dday");
+				String rday=rs.getString("rday");
+				int usein=rs.getInt("usein");
+				int usewifi=rs.getInt("usewifi");
+				int usenavi=rs.getInt("usenavi");
+				int useseat=rs.getInt("useseat");
+				vo=new CarReserveVO(seqN, no,id,qty,dday,rday,usein,usewifi,usenavi,useseat);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			dbClose();
+		}
+		return vo;
+	}
+	
+	//예약 전체 리스트
+	public ArrayList<CarReserveVO> getRsvList() {
+		String SQL="select * from carreserve";
+		getConnect();
+		ArrayList<CarReserveVO> list=new ArrayList<CarReserveVO>();
+		try {
+			ps=conn.prepareStatement(SQL);
+			rs=ps.executeQuery();
+			while(rs.next()) {
+				int reserve_seq=rs.getInt("reserve_seq");
+				int no=rs.getInt("no");
+				String id =rs.getString("id");
+				int qty=rs.getInt("qty");
+				int dday=rs.getInt("dday");
+				String rday=rs.getString("rday");
+				int usein=rs.getInt("usein");
+				int usewifi=rs.getInt("usewifi");
+				int usenavi=rs.getInt("usenavi");
+				int useseat=rs.getInt("useseat");
+				CarReserveVO vo=new CarReserveVO(reserve_seq,no,id,qty,dday,rday,usein,usewifi,usenavi,useseat);
+				list.add(vo);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			dbClose();
+		}
+		return list;
+	}
+	
+	public void addRsvDB(int carNo,String id, int qty, int dday,
+		String rday, int usein, int usewifi, int usenavi, int useseat) {
+		
+		String SQL="insert into carreserve (no,id,qty,dday,rday,usein,usewifi,usenavi,useseat) values(?,?,?,?,?,?,?,?,?)"; 
+		String SQL2="UPDATE rentcar SET usepeople = usepeople -? WHERE no =?";
+		getConnect();
+		  try {
+			  	ps=conn.prepareStatement(SQL); 
+				ps.setInt(1, carNo);
+				ps.setString(2, id);
+				ps.setInt(3, qty);
+				ps.setInt(4, dday);
+				ps.setString(5, rday);
+				ps.setInt(6, usein);
+				ps.setInt(7, usewifi);
+				ps.setInt(8, usenavi);
+				ps.setInt(9, useseat);
+				ps.executeUpdate(); 
+			  	ps=conn.prepareStatement(SQL2);
+			  	ps.setInt(1, qty);
+			  	ps.setInt(1, carNo);
+			  	ps.executeUpdate(); 
+		   }catch (Exception e) {
+			e.printStackTrace();
+		   }finally {
+			   dbClose();
+		  }
+	}
+	
+	//아이디별 예약 리스트
+	public ArrayList<CarReserveVO> getListId(String userId) {
+		String SQL="select * from carreserve where id=?";
+		getConnect();
+		ArrayList<CarReserveVO> list=new ArrayList<CarReserveVO>();
+		try {
+			ps=conn.prepareStatement(SQL);
+			ps.setString(1, userId);
+			rs=ps.executeQuery();
+			while(rs.next()) {
+				int reserve_seq=rs.getInt("reserve_seq");
+				int no=rs.getInt("no");
+				String id =rs.getString("id");
+				int qty=rs.getInt("qty");
+				int dday=rs.getInt("dday");
+				String rday=rs.getString("rday");
+				int usein=rs.getInt("usein");
+				int usewifi=rs.getInt("usewifi");
+				int usenavi=rs.getInt("usenavi");
+				int useseat=rs.getInt("useseat");
+				CarReserveVO vo=new CarReserveVO(reserve_seq,no,id,qty,dday,rday,usein,usewifi,usenavi,useseat);
+				list.add(vo);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			dbClose();
+		}
+		return list;
+	}
+	
+	public void rsvDbDelete(String rsvNo, String carNo, String qty) {
+		int rno=Integer.parseInt(rsvNo);
+		int cno=Integer.parseInt(carNo);
+		int qt=Integer.parseInt(qty);
+		
+		 String SQL="delete from carreserve where reserve_seq=?";
+		 String SQL2="UPDATE rentcar SET usepeople = usepeople +? WHERE no =?";
+		 
+		 getConnect();
+		 try {
+		   ps=conn.prepareStatement(SQL);
+		   ps.setInt(1,rno);
+		   ps.executeUpdate();
+		   ps=conn.prepareStatement(SQL2);
+		   ps.setInt(1,cno);
+		   ps.setInt(1,qt);
+		   ps.executeUpdate();
+		 } catch (Exception e) {
+			e.printStackTrace();
+		 }finally {
+			dbClose();
+		}	   
 	}
 	
 }
